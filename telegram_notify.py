@@ -5,6 +5,7 @@ from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit, parse_qsl, urlencode
 from decimal import Decimal
 import requests
+from review import catalog, message as review_message
 
 def canonical(url):
     p = urlsplit(url)
@@ -44,13 +45,23 @@ def main():
             if not price.is_finite() or not 0 < price <= 5000:
                 continue
             url=item["url"]
-            if urlsplit(url).scheme!="https":
+            if urlsplit(url).scheme!="https" or catalog(url):
                 continue
             key="candidate:"+canonical(url)+":"+str(price.quantize(Decimal("0.01")))
             value=f"{price:,.2f}".replace(",","X").replace(".",",").replace("X",".")
             message=f"🧊 Oferta candidata (não verificada)\n{item['title'][:500]}\nPreço indicativo: R$ {value}\nConfirme 220 V, condição nova, estoque, total parcelado e frete para Brasília.\n{url}"
             count+=notify(db,key,message,send)
         print("New candidate notifications:",count)
+        rejected = Path("rejected.json")
+        if rejected.exists():
+            for item in json.loads(rejected.read_text(encoding="utf-8")):
+                if item["reason"] not in ("brand_missing","other_brand","catalog_page"):
+                    continue
+                url = item["url"]
+                if urlsplit(url).scheme != "https":
+                    continue
+                key = "review:"+canonical(url)+":"+item["reason"]+":"+",".join(sorted(item["prices"]))+":"+item["voltage"]
+                notify(db,key,review_message(item),send)
 
 if __name__=="__main__":
     main()
