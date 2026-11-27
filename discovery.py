@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from urllib.parse import urlsplit
 from pathlib import Path
 import requests
+from review import review_reason, record
+from telegram_notify import canonical
 
 BRANDS = re.compile(r"\b(Electrolux|Midea|LG|Samsung|Brastemp)\b", re.I)
 MODEL = re.compile(r"side[ -]by[ -]side", re.I)
@@ -23,7 +25,7 @@ QUERIES = ["geladeira side by side 220V preço total até 5000 parcelado cartão
 def query_for(now):
     return QUERIES[int(now.timestamp() // 3600) % len(QUERIES)]
 
-def candidates(results):
+def candidates(results, rejected=None):
     from collections import Counter
     reasons = Counter()
     seen = set()
@@ -35,7 +37,7 @@ def candidates(results):
         reason = None
         if urlsplit(url).scheme != "https" or not urlsplit(url).hostname:
             reason = "invalid_url"
-        elif url in seen:
+        elif canonical(url) in seen:
             reason = "duplicate"
         elif not BRANDS.search(combined):
             reason = "brand_missing"
@@ -57,11 +59,14 @@ def candidates(results):
                 reason = "no_non_installment_price"
             elif not all(500 <= p <= 5000 for p in prices):
                 reason = "price_outside_range_or_ambiguous"
+        reason = review_reason(url, combined, reason)
         if reason:
+            if rejected is not None:
+                rejected.append(record(url, title, combined, reason, PRICE, VOLTAGE))
             reasons[reason] += 1
             print("Rejected:", reason, url)
             continue
-        seen.add(url)
+        seen.add(canonical(url))
         yield {"url":url,"title":title,"indicative_price":min(prices),"status":"unverified"}
     print("Search summary:", json.dumps({"received":len(results),"accepted":len(seen),"rejected":dict(reasons)}))
 
@@ -92,7 +97,12 @@ def main():
         if not response.ok:
             print("Discovery API HTTP", response.status_code)
             raise SystemExit(1)
-        found = list(candidates(response.json().get("results",[])))
+        rejected = []
+        found = list(candidates(response.json().get("results",[]), rejected))
+        db.execute("CREATE TABLE IF NOT EXISTS rejected_results (hour TEXT, data TEXT)")
+        db.executemany("INSERT INTO rejected_results VALUES (?,?)", [(now.isoformat(), json.dumps(item, ensure_ascii=False)) for item in rejected])
+        db.commit()
+        Path("rejected.json").write_text(json.dumps(rejected, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
         Path("candidates.json").write_text(json.dumps(found,ensure_ascii=False,indent=2)+"\n", encoding="utf-8")
         print("Unverified candidates:",len(found))
 
