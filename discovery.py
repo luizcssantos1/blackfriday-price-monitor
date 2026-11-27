@@ -12,26 +12,58 @@ BRANDS = re.compile(r"\b(Electrolux|Midea|LG|Samsung|Brastemp)\b", re.I)
 MODEL = re.compile(r"side[ -]by[ -]side", re.I)
 VOLTAGE = re.compile(r"\b220\s*v\b", re.I)
 PRICE = re.compile(r"R\$\s*(\d{1,3}(?:\.\d{3})*|\d+),\d{2}(?!\d)")
-QUERY = "geladeira refrigerador side by side 220V Electrolux OR Midea OR LG OR Samsung OR Brastemp preço até R$ 3000 Brasil"
+QUERIES = ["geladeira side by side 220V preço até 3000 Brasil"] + [
+    "geladeira side by side 220V preço à vista " + brand
+    for brand in ("Electrolux", "Midea", "LG", "Samsung", "Brastemp")
+] + [
+    "geladeira side by side 220V oferta " + store
+    for store in ("Magalu", "Casas Bahia", "Fast Shop", "Carrefour", "Amazon Brasil")
+]
+
+def query_for(now):
+    return QUERIES[int(now.timestamp() // 3600) % len(QUERIES)]
 
 def candidates(results):
+    from collections import Counter
+    reasons = Counter()
     seen = set()
     for item in results:
         url = item.get("url", "")
         title = item.get("title", "")
         snippet = item.get("content", "")
-        if urlsplit(url).scheme != "https" or not urlsplit(url).hostname or url in seen:
-            continue
-        if not all(p.search(title) for p in (BRANDS, MODEL, VOLTAGE)):
-            continue
-        if re.search(r"\b(usad[ao]|recondicionad[ao]|127\s*v|110\s*v)\b", title, re.I):
-            continue
-        prices = [float(m.group().replace("R$", "").strip().replace(".", "").replace(",", ".")) for m in PRICE.finditer(title+" "+snippet)]
-        prices = [p for p in prices if 500 <= p <= 3000]
-        if not prices:
+        combined = title + " " + snippet
+        reason = None
+        if urlsplit(url).scheme != "https" or not urlsplit(url).hostname:
+            reason = "invalid_url"
+        elif url in seen:
+            reason = "duplicate"
+        elif not BRANDS.search(combined):
+            reason = "brand_missing"
+        elif not MODEL.search(combined):
+            reason = "model_missing"
+        elif not VOLTAGE.search(combined):
+            reason = "voltage_missing"
+        elif re.search(r"\\b(usad[ao]|recondicionad[ao]|127\\s*v|110\\s*v)\\b", combined, re.I):
+            reason = "condition_or_voltage_conflict"
+        else:
+            prices = []
+            for m in PRICE.finditer(combined):
+                before = combined[max(0,m.start()-35):m.start()]
+                after = combined[m.end():m.end()+35]
+                if re.search(r"\\d+\\s*x\\s*(?:de\\s*)?$|parcela[s]?\\s*(?:de\\s*)?$", before, re.I) or re.search(r"^\\s*(?:/mês|por mês|cada parcela)", after, re.I):
+                    continue
+                prices.append(float(m.group().replace("R$", "").strip().replace(".", "").replace(",", ".")))
+            if not prices:
+                reason = "no_non_installment_price"
+            elif not all(500 <= p <= 3000 for p in prices):
+                reason = "price_outside_range_or_ambiguous"
+        if reason:
+            reasons[reason] += 1
+            print("Rejected:", reason, url)
             continue
         seen.add(url)
         yield {"url":url,"title":title,"indicative_price":min(prices),"status":"unverified"}
+    print("Search summary:", json.dumps({"received":len(results),"accepted":len(seen),"rejected":dict(reasons)}))
 
 def reserve(db, now):
     month = now.strftime("%Y-%m")
@@ -49,12 +81,17 @@ def main():
         print("Discovery disabled: configure TAVILY_API_KEY.")
         return
     with sqlite3.connect("prices.db") as db:
-        if not reserve(db, datetime.now(timezone.utc)):
+        now = datetime.now(timezone.utc)
+        if not reserve(db, now):
+            print("Discovery skipped: hourly or monthly quota reached.")
             return
-        response = requests.post("https://api.tavily.com/search", headers={"Authorization":"Bearer "+key}, json={"query":QUERY,"search_depth":"basic","auto_parameters":False,"max_results":20,"include_answer":False,"include_raw_content":False}, timeout=30)
+        query = query_for(now)
+        print("Search query:", query)
+        print("Monthly reserved calls:", db.execute("SELECT COUNT(*) FROM discovery_calls WHERE month=?", (now.strftime("%Y-%m"),)).fetchone()[0])
+        response = requests.post("https://api.tavily.com/search", headers={"Authorization":"Bearer "+key}, json={"query":query,"search_depth":"basic","auto_parameters":False,"max_results":20,"include_answer":False,"include_raw_content":False}, timeout=30)
         if not response.ok:
             print("Discovery API HTTP", response.status_code)
-            return
+            raise SystemExit(1)
         found = list(candidates(response.json().get("results",[])))
         Path("candidates.json").write_text(json.dumps(found,ensure_ascii=False,indent=2)+"\n", encoding="utf-8")
         print("Unverified candidates:",len(found))
