@@ -17,13 +17,21 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python -m unittest -v test_discovery
+      - run: python -m unittest -v test_discovery test_telegram
       - name: Discover offers
         id: discovery
         continue-on-error: true
         run: python discovery.py
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      - name: Telegram test and candidate alerts
+        id: telegram
+        if: steps.discovery.outcome == 'success'
+        continue-on-error: true
+        run: python telegram_notify.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       - run: python monitor.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -35,6 +43,6 @@ jobs:
           if test -f prices.db; then git add prices.db; fi
           if test -f candidates.json; then git add candidates.json; fi
           git diff --cached --quiet || (git commit -m 'Atualiza histórico de preços' && git push)
-      - name: Report discovery failure
-        if: steps.discovery.outcome == 'failure'
+      - name: Report discovery or Telegram failure
+        if: steps.discovery.outcome == 'failure' || steps.telegram.outcome == 'failure'
         run: exit 1
