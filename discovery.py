@@ -12,8 +12,8 @@ BRANDS = re.compile(r"\b(Electrolux|Midea|LG|Samsung|Brastemp)\b", re.I)
 MODEL = re.compile(r"side[ -]by[ -]side", re.I)
 VOLTAGE = re.compile(r"\b220\s*v\b", re.I)
 PRICE = re.compile(r"R\$\s*(\d{1,3}(?:\.\d{3})*|\d+),\d{2}(?!\d)")
-QUERIES = ["geladeira side by side 220V preço até 3000 Brasil"] + [
-    "geladeira side by side 220V preço à vista " + brand
+QUERIES = ["geladeira side by side 220V preço total até 5000 parcelado cartão Brasil"] + [
+    "geladeira side by side 220V preço total parcelado " + brand
     for brand in ("Electrolux", "Midea", "LG", "Samsung", "Brastemp")
 ] + [
     "geladeira side by side 220V oferta " + store
@@ -55,7 +55,7 @@ def candidates(results):
                 prices.append(float(m.group().replace("R$", "").strip().replace(".", "").replace(",", ".")))
             if not prices:
                 reason = "no_non_installment_price"
-            elif not all(500 <= p <= 3000 for p in prices):
+            elif not all(500 <= p <= 5000 for p in prices):
                 reason = "price_outside_range_or_ambiguous"
         if reason:
             reasons[reason] += 1
