@@ -43,14 +43,14 @@ def candidates(results):
             reason = "model_missing"
         elif not VOLTAGE.search(combined):
             reason = "voltage_missing"
-        elif re.search(r"\\b(usad[ao]|recondicionad[ao]|127\\s*v|110\\s*v)\\b", combined, re.I):
+        elif re.search(r"\b(usad[ao]|recondicionad[ao]|127\s*v|110\s*v)\b", combined, re.I):
             reason = "condition_or_voltage_conflict"
         else:
             prices = []
             for m in PRICE.finditer(combined):
                 before = combined[max(0,m.start()-35):m.start()]
                 after = combined[m.end():m.end()+35]
-                if re.search(r"\\d+\\s*x\\s*(?:de\\s*)?$|parcela[s]?\\s*(?:de\\s*)?$", before, re.I) or re.search(r"^\\s*(?:/mês|por mês|cada parcela)", after, re.I):
+                if re.search(r"\d+\s*x\s*(?:de\s*)?$|parcela[s]?\s*(?:de\s*)?$", before, re.I) or re.search(r"^\s*(?:/mês|por mês|cada parcela)", after, re.I):
                     continue
                 prices.append(float(m.group().replace("R$", "").strip().replace(".", "").replace(",", ".")))
             if not prices:
