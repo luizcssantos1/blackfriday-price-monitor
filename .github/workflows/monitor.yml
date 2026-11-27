@@ -17,6 +17,10 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
+      - run: python -m unittest -v test_discovery
+      - run: python discovery.py
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       - run: python monitor.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -25,4 +29,5 @@ jobs:
           git config user.name price-monitor
           git config user.email price-monitor@users.noreply.github.com
           git add prices.db
+          if test -f candidates.json; then git add candidates.json; fi
           git diff --cached --quiet || (git commit -m 'Atualiza histórico de preços' && git push)
