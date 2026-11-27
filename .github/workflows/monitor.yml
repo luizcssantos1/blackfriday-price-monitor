@@ -57,6 +57,7 @@ jobs:
           git config user.email price-monitor@users.noreply.github.com
           if test -f prices.db; then git add prices.db; fi
           if test -f candidates.json; then git add candidates.json; fi
+          if test -f rejected.json; then git add rejected.json; fi
           git diff --cached --quiet || (git commit -m 'Atualiza histórico de preços' && git push)
       - name: Report discovery or Telegram failure
         if: steps.discovery.outcome == 'failure' || steps.telegram.outcome == 'failure'
