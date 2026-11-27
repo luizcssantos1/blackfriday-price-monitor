@@ -17,11 +17,15 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - run: python -m unittest -v test_discovery test_telegram
+      - id: tests
+        run: python -m unittest -v test_discovery test_telegram
       - name: Discover offers
         id: discovery
         continue-on-error: true
-        run: python discovery.py
+        run: |
+          set -o pipefail
+          test -n "$TAVILY_API_KEY" || { echo 'Missing Tavily key'; exit 1; }
+          python discovery.py | tee discovery.log
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       - name: Telegram test and candidate alerts
@@ -32,10 +36,21 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      - run: python monitor.py
+      - id: monitor
+        run: python monitor.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      - name: Telegram health report
+        if: always()
+        run: python health_report.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_OUTCOME: ${{ steps.tests.outcome }}
+          DISCOVERY_OUTCOME: ${{ steps.discovery.outcome }}
+          TELEGRAM_OUTCOME: ${{ steps.telegram.outcome }}
+          MONITOR_OUTCOME: ${{ steps.monitor.outcome }}
       - if: always()
         run: |
           git config user.name price-monitor
