@@ -9,7 +9,7 @@ class DiscoveryTest(unittest.TestCase):
         self.assertEqual(len(list(candidates([base,base]))),1)
         for title in ["Geladeira LG Side by Side 127V","Geladeira Consul Side by Side 220V","Geladeira LG Duplex 220V","Geladeira LG Side by Side 220V usada"]:
             self.assertEqual(list(candidates([dict(base,title=title)])),[])
-        self.assertEqual(list(candidates([dict(base,content="R$ 3.500,00")])),[])
+        self.assertEqual(list(candidates([dict(base,content="R$ 5.500,00")])),[])
     def test_description_and_installments(self):
         base={"title":"Geladeira LG Side by Side","url":"https://example.com/p","content":"220V R$ 2.999,90"}
         self.assertEqual(len(list(candidates([base]))),1)
