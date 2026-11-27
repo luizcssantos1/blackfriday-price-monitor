@@ -4,7 +4,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-LIMIT = 3000
+LIMIT = 5000
 BRANDS = ("Electrolux", "Midea", "LG", "Samsung", "Brastemp")
 BRAND_PATTERN = re.compile(r"\b(?:" + "|".join(map(re.escape, BRANDS)) + r")\b", re.I)
 
