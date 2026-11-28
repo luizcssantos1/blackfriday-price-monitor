@@ -1,178 +1,244 @@
 [
   {
-    "url": "https://www.instagram.com/reel/C9S0jdMPzSB?hl=en",
-    "title": "Refrigerador Electrolux Side Inverse IM8S Motor com ... - Instagram",
-    "reason": "model_missing",
-    "catalog": false,
+    "url": "https://www.buscape.com.br/busca/geladeira+side+by+side+220v",
+    "title": "Geladeira side by side 220v com menor preço é no Buscapé",
+    "reason": "price_outside_range_or_ambiguous",
+    "catalog": true,
     "prices": [
-      "R$ 5699,99",
-      "R$ 599,99",
-      "R$ 5999,99"
+      "R$ 6.583,40",
+      "R$ 5.747,60",
+      "R$ 718,45",
+      "R$ 3.689,91",
+      "R$ 4.929,15",
+      "R$ 645,13",
+      "R$ 4.163,40",
+      "R$ 462,60",
+      "R$ 4.999,00"
     ],
     "voltage": "220 V"
   },
   {
-    "url": "https://www.zoom.com.br/busca/geladeira+electrolux+side+by+side",
-    "title": "Geladeira electrolux side by side com o menor preço | Zoom",
-    "reason": "voltage_missing",
-    "catalog": true,
-    "prices": [
-      "R$ 4.199,00",
-      "R$ 233,27"
-    ],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://www.buscape.com.br/busca/side+by+side+electrolux",
-    "title": "Side by side electrolux com menor preço é no Buscapé",
-    "reason": "voltage_missing",
-    "catalog": true,
-    "prices": [
-      "R$ 5.669,10",
-      "R$ 3.869,10"
-    ],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://www.facebook.com/williamdinamico/videos/a-electrolux-tem-side-by-side-demais-parte-2-tem-geladeira-de-431l-custando-mais/1739255270551539",
-    "title": "A ELECTROLUX TEM SIDE BY SIDE DEMAIS! PARTE 2 ... - Facebook",
-    "reason": "voltage_missing",
+    "url": "https://www.instagram.com/p/Da023gkEu92",
+    "title": "Fast Shop | A Geladeira Side by Side Midea 570L foi ...",
+    "reason": "no_non_installment_price",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://www.instagram.com/reel/DehYgWYBJiP",
-    "title": "GELADEIRA ELECTROLUX SIDE BY SIDE 550 LITROS FROST ...",
-    "reason": "voltage_missing",
+    "url": "https://site.fastshop.com.br/s?q=Geladeira+side+by+side",
+    "title": "Geladeira side by side",
+    "reason": "no_non_installment_price",
+    "catalog": true,
+    "prices": [],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://site.fastshop.com.br/geladeira-side-by-side-570l-dispenser-agua-e-gelo-inverter-cor-inox-midea-114705/p",
+    "title": "Geladeira Side by Side 570L Dispenser Água e Gelo Inverter ...",
+    "reason": "no_non_installment_price",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://loja.electrolux.com.br/eletrodomesticos/geladeiras---refrigeradores",
-    "title": "Geladeira com freezer: modelos premium para cozinha | Electrolux",
+    "url": "https://compraseguraedescomplicada.com/melhor-geladeira-side-by-side",
+    "title": "Melhor Geladeira Side by Side: 5 Modelos Comparados em 2026",
     "reason": "condition_or_voltage_conflict",
     "catalog": false,
+    "prices": [],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://www.magazineluiza.com.br/busca/geladeira+by+side+220v",
+    "title": "Geladeira By Side 220v em Promoção no Magazine Luiza",
+    "reason": "no_non_installment_price",
+    "catalog": true,
+    "prices": [],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://www.buscape.com.br/busca/geladeira+e+refrigerador+220v",
+    "title": "Geladeira e refrigerador 220v com menor preço é no Buscapé",
+    "reason": "price_outside_range_or_ambiguous",
+    "catalog": true,
     "prices": [
-      "R$ 6.399,00",
-      "R$ 6.299,00",
-      "R$ 4.619,00",
-      "R$ 4.499,00"
+      "R$ 2.699,10",
+      "R$ 275,90",
+      "R$ 2.334,21",
+      "R$ 5.894,10",
+      "R$ 602,50",
+      "R$ 4.199,00",
+      "R$ 285,10",
+      "R$ 3.670,62",
+      "R$ 394,69"
     ],
     "voltage": "220 V"
   },
   {
-    "url": "https://www.casasbahia.com.br/geladeira-side-by-side/b",
-    "title": "Geladeira side by side: Electrolux, Samsung e mais - Casas Bahia",
-    "reason": "voltage_missing",
+    "url": "https://shopee.com.br/list/Geladeira/220V",
+    "title": "Geladeira 220V em Oferta | Shopee 2026",
+    "reason": "brand_missing",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://site.fastshop.com.br/geladeira-electrolux-frost-free-inverter-435l-efficient-com-autosense-side-by-side-cor-inox-look--is4s--48494/p",
-    "title": "Geladeira Electrolux Frost Free Inverter 435L Efficient com AutoSense Side by Side cor Inox Look (IS4S) | Fastshop",
-    "reason": "voltage_missing",
-    "catalog": false,
-    "prices": [
-      "R$ 4.084,05"
-    ],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://www.youtube.com/watch?v=P9FQ3uARffA",
-    "title": "Electrolux Side by Side Refrigerator IS4S Full Review / Is it good? / Does it cool quickly? / Review",
-    "reason": "voltage_missing",
-    "catalog": false,
-    "prices": [],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://www.instagram.com/reel/DcO58VQIZlK",
-    "title": "A ELECTROLUX TEM SIDE BY SIDE DEMAIS! PARTE 2 ... - Instagram",
-    "reason": "voltage_missing",
-    "catalog": false,
-    "prices": [],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://www.shopclub.com.br/eletrodomesticos/geladeiras---refrigeradores/geladeira-side-by-side",
-    "title": "Geladeira side by side - shopclub.com.br",
-    "reason": "voltage_missing",
-    "catalog": false,
-    "prices": [],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://www.magazineluiza.com.br/busca/geladeira+electrolux",
-    "title": "Geladeira Electrolux em Oferta | Magalu",
-    "reason": "model_missing",
+    "url": "https://www.buscape.com.br/busca/geladeira+midea+220+v",
+    "title": "Geladeira midea 220 v com menor preço é no Buscapé",
+    "reason": "price_outside_range_or_ambiguous",
     "catalog": true,
     "prices": [
-      "R$ 1.499,00"
+      "R$ 2.834,58",
+      "R$ 2.249,10",
+      "R$ 229,90",
+      "R$ 2.699,10",
+      "R$ 2.760,43",
+      "R$ 5.160,57",
+      "R$ 554,90",
+      "R$ 2.699,00",
+      "R$ 284,11"
     ],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://www.youtube.com/watch?v=zAYFHvIg9UU",
-    "title": "BLACK FRIDAY Electrolux ES5GB Side by Side Refrigerator 526 ...",
-    "reason": "voltage_missing",
+    "url": "https://empresas.fastshop.com.br/refrigerador-lg-side-by-side-509-litros-prata-220v-gc-b187pqam-199678/p",
+    "title": "Refrigerador LG Side By Side 509 Litros Prata 220V GC ...",
+    "reason": "no_non_installment_price",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://www.youtube.com/watch?v=cjofa7jDabE&vl=en-US",
-    "title": "Is the Electrolux Side by Side IS4S 435-liter Refrigerator ... - YouTube",
-    "reason": "voltage_missing",
+    "url": "https://www.magazineluiza.com.br/geladeira-refrigerador-side-by-side/eletrodomesticos/s/ed/grsb/voltagem---220v",
+    "title": "Geladeira Refrigerador Side By Side - Magazine Luiza",
+    "reason": "no_non_installment_price",
+    "catalog": true,
+    "prices": [],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://www.buscape.com.br/busca/geladeira+inox+2portas",
+    "title": "Geladeira inox 2portas com menor preço é no Buscapé",
+    "reason": "brand_missing",
+    "catalog": true,
+    "prices": [
+      "R$ 16.271,89",
+      "R$ 8.813,89",
+      "R$ 13.785,89",
+      "R$ 17.740,89",
+      "R$ 21.582,89"
+    ],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://www.amazon.com.br/geladeira-240-litros-220v/s?k=geladeira+240+litros+220v",
+    "title": "Amazon.com.br : geladeira 240 litros 220v",
+    "reason": "condition_or_voltage_conflict",
+    "catalog": true,
+    "prices": [
+      "R$ 3.118,99",
+      "R$ 3.672,63",
+      "R$3.672,63",
+      "R$ 288,79",
+      "R$288,79",
+      "R$ 140,64",
+      "R$140,64",
+      "R$ 2.709,61",
+      "R$ 3.623,75",
+      "R$3.623,75",
+      "R$ 265,64",
+      "R$265,64",
+      "R$ 721,90",
+      "R$ 869,00",
+      "R$869,00",
+      "R$ 63,32",
+      "R$63,32"
+    ],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://www.buscape.com.br/geladeira/side-by-side",
+    "title": "Geladeira Side by Side: Com o melhor preço | Buscapé",
+    "reason": "no_non_installment_price",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://topcomparativos.com.br/melhor-geladeira-side-by-side-electrolux",
-    "title": "Melhor geladeira side by side electrolux: 10 modelos bem avaliados",
-    "reason": "voltage_missing",
+    "url": "https://pesquiseicomprei.net.br/melhor-geladeira-side-by-side",
+    "title": "Qual a melhor geladeira side by side para comprar em 2026?",
+    "reason": "condition_or_voltage_conflict",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://www.amazon.com.br/Geladeira-Electrolux-Efficient-Tecnologia-Autosense/dp/B0C15F8Q56",
-    "title": "Geladeira Electrolux Side by Side Efficient com Tecnologia Autosense 435L (IS4S) 127V : Amazon.com.br: Cozinha",
-    "reason": "voltage_missing",
-    "catalog": false,
-    "prices": [],
-    "voltage": "Não confirmada"
+    "url": "https://www.buscape.com.br/busca/geladeira+frost+free+310+220v",
+    "title": "Geladeira frost free 310 220v com menor preço é no Buscapé",
+    "reason": "catalog_page",
+    "catalog": true,
+    "prices": [
+      "R$ 4.607,10",
+      "R$ 470,94",
+      "R$ 3.799,05",
+      "R$ 399,90",
+      "R$ 4.199,00",
+      "R$ 3.989,00",
+      "R$ 369,35",
+      "R$ 2.699,10",
+      "R$ 275,90",
+      "R$ 2.334,21"
+    ],
+    "voltage": "220 V"
   },
   {
-    "url": "https://www.pontofrio.com.br/geladeira-side-by-side/b",
-    "title": "Geladeira side by side: Electrolux, Samsung e mais - Ponto Frio",
-    "reason": "voltage_missing",
-    "catalog": false,
-    "prices": [],
-    "voltage": "Não confirmada"
+    "url": "https://www.zoom.com.br/busca/geladeira+side+by+side+midea++442l",
+    "title": "Geladeira side by side midea 442l com o menor preço | Zoom",
+    "reason": "condition_or_voltage_conflict",
+    "catalog": true,
+    "prices": [
+      "R$ 3.824,15",
+      "R$ 500,51",
+      "R$ 481,73",
+      "R$ 5.645,99",
+      "R$ 7.975,08",
+      "R$ 886,12",
+      "R$ 3.999,00",
+      "R$ 420,95",
+      "R$ 4.499,10"
+    ],
+    "voltage": "220 V"
   },
   {
-    "url": "https://www.leroymerlin.com.br/geladeiras-eletrolux",
-    "title": "Geladeira Electrolux em oferta - Leroy Merlin",
+    "url": "https://www.buscape.com.br/busca/geladeira+side+by+side+442l++midea",
+    "title": "Geladeira side by side 442l midea com menor preço é no Buscapé",
+    "reason": "condition_or_voltage_conflict",
+    "catalog": true,
+    "prices": [
+      "R$ 3.824,15",
+      "R$ 500,51",
+      "R$ 481,73",
+      "R$ 5.645,99",
+      "R$ 7.975,08",
+      "R$ 886,12",
+      "R$ 4.499,10",
+      "R$ 3.999,00",
+      "R$ 420,95"
+    ],
+    "voltage": "220 V"
+  },
+  {
+    "url": "https://www.brastemp.com.br/eletrodomesticos/geladeira---refrigerador",
+    "title": "Geladeira: Modelos Frost Free, Inverse e muito mais | Brastemp",
     "reason": "model_missing",
     "catalog": false,
     "prices": [],
-    "voltage": "Não confirmada"
+    "voltage": "220 V"
   },
   {
-    "url": "https://tavily.com/knowledge/company/ebdZGMgMOZQL",
-    "title": "Electrolux Group",
-    "reason": "model_missing",
-    "catalog": false,
-    "prices": [],
-    "voltage": "Não confirmada"
-  },
-  {
-    "url": "https://lista.mercadolivre.com.br/geladeira-side-by-side",
-    "title": "Segurança — Mercado Livre",
+    "url": "https://tavily.com/knowledge/company/p6Q2Jqigkrd1",
+    "title": "Fast Shop S/A",
     "reason": "brand_missing",
     "catalog": false,
     "prices": [],
